@@ -7,7 +7,8 @@
 -- Stability   :  provisional
 -- Portability :  portable
 --
--- This module provides lenses for types in 'Network.SimpleIRC.Messages'.
+-- This module provides lenses for types in
+-- <https://hackage.haskell.org/package/simpleirc/docs/Network-SimpleIRC-Messages.html Network.SimpleIRC.Messages>.
 -------------------------------------------------------------------------------
 
 module Network.SimpleIRC.Messages.Lens

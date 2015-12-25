@@ -13,7 +13,7 @@
 
 module Network.SimpleIRC.Core.Lens
        ( -- * 'IrcConfig'
-         addr, port, nick, pass, username, realname, channels, events,
+         addr, port, secure, nick, pass, username, realname, channels, events,
          ctcpVersion, ctcpTime, ctcpPingTimeoutInterval
        ) where
 
@@ -21,58 +21,62 @@ import Network.SimpleIRC.Core
 
 addr
   :: Functor f => (String -> f String) -> IrcConfig -> f IrcConfig
-addr fn (IrcConfig a b c d e f g h i j k) =
-  fmap (\a' -> IrcConfig a' b c d e f g h i j k) (fn a)
+addr fn (IrcConfig a b c d e f g h i j k l) =
+  fmap (\a' -> IrcConfig a' b c d e f g h i j k l) (fn a)
 
 port :: Functor f => (Int -> f Int) -> IrcConfig -> f IrcConfig
-port fn (IrcConfig a b c d e f g h i j k) =
-  fmap (\b' -> IrcConfig a b' c d e f g h i j k) (fn b)
+port fn (IrcConfig a b c d e f g h i j k l) =
+  fmap (\b' -> IrcConfig a b' c d e f g h i j k l) (fn b)
+
+secure :: Functor f => (Bool -> f Bool) -> IrcConfig -> f IrcConfig
+secure fn (IrcConfig a b c d e f g h i j k l) =
+  fmap (\c' -> IrcConfig a b c' d e f g h i j k l) (fn c)
 
 nick
   :: Functor f => (String -> f String) -> IrcConfig -> f IrcConfig
-nick fn (IrcConfig a b c d e f g h i j k) =
-  fmap (\c' -> IrcConfig a b c' d e f g h i j k) (fn c)
+nick fn (IrcConfig a b c d e f g h i j k l) =
+  fmap (\d' -> IrcConfig a b c d' e f g h i j k l) (fn d)
 
 pass
   :: Functor f =>
      (Maybe String -> f (Maybe String)) -> IrcConfig -> f IrcConfig
-pass fn (IrcConfig a b c d e f g h i j k) =
-  fmap (\d' -> IrcConfig a b c d' e f g h i j k) (fn d)
+pass fn (IrcConfig a b c d e f g h i j k l) =
+  fmap (\e' -> IrcConfig a b c d e' f g h i j k l) (fn e)
 
 username
   :: Functor f => (String -> f String) -> IrcConfig -> f IrcConfig
-username fn (IrcConfig a b c d e f g h i j k) =
-  fmap (\e' -> IrcConfig a b c d e' f g h i j k) (fn e)
+username fn (IrcConfig a b c d e f g h i j k l) =
+  fmap (\f' -> IrcConfig a b c d e f' g h i j k l) (fn f)
 
 realname
   :: Functor f => (String -> f String) -> IrcConfig -> f IrcConfig
-realname fn (IrcConfig a b c d e f g h i j k) =
-  fmap (\f' -> IrcConfig a b c d e f' g h i j k) (fn f)
+realname fn (IrcConfig a b c d e f g h i j k l) =
+  fmap (\g' -> IrcConfig a b c d e f g' h i j k l) (fn g)
 
 channels
   :: Functor f =>
      ([String] -> f [String]) -> IrcConfig -> f IrcConfig
-channels fn (IrcConfig a b c d e f g h i j k) =
-  fmap (\g' -> IrcConfig a b c d e f g' h i j k) (fn g)
+channels fn (IrcConfig a b c d e f g h i j k l) =
+  fmap (\h' -> IrcConfig a b c d e f g h' i j k l) (fn h)
 
 events
   :: Functor f =>
      ([IrcEvent] -> f [IrcEvent]) -> IrcConfig -> f IrcConfig
-events fn (IrcConfig a b c d e f g h i j k) =
-  fmap (\h' -> IrcConfig a b c d e f g h' i j k) (fn h)
+events fn (IrcConfig a b c d e f g h i j k l) =
+  fmap (\i' -> IrcConfig a b c d e f g h i' j k l) (fn i)
 
 ctcpVersion
   :: Functor f => (String -> f String) -> IrcConfig -> f IrcConfig
-ctcpVersion fn (IrcConfig a b c d e f g h i j k) =
-  fmap (\i' -> IrcConfig a b c d e f g h i' j k) (fn i)
+ctcpVersion fn (IrcConfig a b c d e f g h i j k l) =
+  fmap (\j' -> IrcConfig a b c d e f g h i j' k l) (fn j)
 
 ctcpTime
   :: Functor f =>
      (IO String -> f (IO String)) -> IrcConfig -> f IrcConfig
-ctcpTime fn (IrcConfig a b c d e f g h i j k) =
-  fmap (\j' -> IrcConfig a b c d e f g h i j' k) (fn j)
+ctcpTime fn (IrcConfig a b c d e f g h i j k l) =
+  fmap (\k' -> IrcConfig a b c d e f g h i j k' l) (fn k)
 
 ctcpPingTimeoutInterval
   :: Functor f => (Int -> f Int) -> IrcConfig -> f IrcConfig
-ctcpPingTimeoutInterval fn (IrcConfig a b c d e f g h i j k) =
-  fmap (\k' -> IrcConfig a b c d e f g h i j k') (fn k)
+ctcpPingTimeoutInterval fn (IrcConfig a b c d e f g h i j k l) =
+  fmap (\l' -> IrcConfig a b c d e f g h i j k l') (fn l)
